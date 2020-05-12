@@ -80,14 +80,14 @@ class UI {
 
     }
 
-    showGrid (element) {
+    showGrid (photos) {
 
         let listView = document.getElementById("grid-view");
         var htmlAdd = '';
         const elementGrid = document.createElement('div');
-        console.log(albums);
 
-        albums.forEach(photo => {
+
+        photos.forEach(photo => {
               htmlAdd = htmlAdd + ` 
                   <source src="${photo.thumbnailUrl}." type="">
           `
@@ -127,7 +127,7 @@ document.getElementById("list-view").addEventListener('click', function (e) {
 
     if (e.target.name === 'ShowAlbum') {
         let albumId = e.target.id;
-        ui.loadPhotos (file, typeView, idAlbum) ;
+        ui.loadPhotos ('/photos.json', 'grid', albumId) ;
     }
 }
 )
