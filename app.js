@@ -12,7 +12,7 @@ class Photo {
 
 class UI {
 
-    loadPhotos (file, typeView) {
+    loadPhotos (file, typeView, idAlbum) {
     var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -40,9 +40,6 @@ class UI {
                 ui.showList (albums);
              } 
              }
-             
-            
-          
         }
       
     
@@ -63,16 +60,14 @@ class UI {
               htmlAdd = htmlAdd + ` 
               <div class="card text-center mb-1">
                   <div class="card-body">
-                      <a href="#" class="btn btn-danger" id="ShowAlbum${album}" name = "ShowAlbun${album}" >Show Album ${album}</a>
+                      <a href="#" class="btn btn-danger" id="${album}" name = "ShowAlbum" >Show Album ${album}</a>
                   </div>
                </div>
           `
           console.log(album);
             
         });
-        //for (const album in albums) {
-        //}      
-        
+
                 element.innerHTML = htmlAdd;
 
         listView.appendChild(element);
@@ -82,9 +77,10 @@ class UI {
 
     }
 
-    showGrid (photos) {
+    showGrid (element) {
+        
+        }
 
-    }
 
     showDetail (photo) {
 
@@ -105,4 +101,19 @@ const ui = new UI();
 ui.loadPhotos('/photos.json', "list");
 
 //ui.loadAlbum('/photos.json');
+
+//Event
+document.getElementById("list-view").addEventListener('click', function (e) {
+
+    const ui = new UI();
+
+    if (element.name === 'ShowAlbum') {
+        let albumId = element.id;
+
+    
+
+    ui.loadPhotos (file, typeView, idAlbum) ;
+    
+}}
+)
  
