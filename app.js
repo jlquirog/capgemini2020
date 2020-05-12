@@ -16,34 +16,35 @@ class UI {
     var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-              alert('aqui esta llegando');
+              
             var responseAlbum = JSON.parse(xhttp.responseText);
             let photos = responseAlbum;
+
+            console.log(photos);
   
             let salida = '';
-            const ui = new UI();  
-            console.log(photos);
-            console.log(photos[1]);
-
+            
 
             let albums = [];
-            let photos =[];
+            
             for(let item of photos) {
-                if (!album.includes(item.albumId)) {
-                    album.push(`Album id ${item.albumId}`);
+                if (!albums.includes(item.albumId)) {
+                    albums.push(item.albumId);
                 }
-                photos.push(item);
-             }
+            }
+            console.log(albums);
 
+            const ui = new UI();
      
-             if (typeView = "list" ){
-                this.showList (albums);
+             if (typeView == "list" ){
+                ui.showList (albums);
              } 
+             }
              
             
           
         }
-      }
+      
     
       xhttp.open("GET", file, true);
         
@@ -51,6 +52,33 @@ class UI {
     };
 
     showList (albums) {
+
+        let listView = document.getElementById("list-view");
+        var htmlAdd = '';
+        const element = document.createElement('div');
+        console.log(albums);
+
+        albums.forEach(album => {
+              //console.log(htmlAdd);
+              htmlAdd = htmlAdd + ` 
+              <div class="card text-center mb-1">
+                  <div class="card-body">
+                      <a href="#" class="btn btn-danger" id="ShowAlbum${album}" name = "ShowAlbun${album}" >Show Album ${album}</a>
+                  </div>
+               </div>
+          `
+          console.log(album);
+            
+        });
+        //for (const album in albums) {
+        //}      
+        
+                element.innerHTML = htmlAdd;
+
+        listView.appendChild(element);
+        
+        
+
 
     }
 
@@ -74,7 +102,7 @@ const ui = new UI();
 //'http://127.0.0.1:5500' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on //
 //the requested resource.
 
-ui.loadPhotos('/photos.json');
+ui.loadPhotos('/photos.json', "list");
 
 //ui.loadAlbum('/photos.json');
  
