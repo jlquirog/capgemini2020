@@ -39,6 +39,9 @@ class UI {
              if (typeView == "list" ){
                 ui.showList (albums);
              } 
+             if (typeView == "grid" ){
+                ui.showGrid (photos,idAlbum);
+             } 
              }
         }
       
@@ -78,10 +81,25 @@ class UI {
     }
 
     showGrid (element) {
+
+        let listView = document.getElementById("grid-view");
+        var htmlAdd = '';
+        const elementGrid = document.createElement('div');
+        console.log(albums);
+
+        albums.forEach(photo => {
+              htmlAdd = htmlAdd + ` 
+                  <source src="${photo.thumbnailUrl}." type="">
+          `
+            
+        });
+
+        elementGrid.innerHTML = htmlAdd;
+
+        listView.appendChild(elementGrid);
+        
         
         }
-
-
     showDetail (photo) {
 
     }
@@ -107,13 +125,10 @@ document.getElementById("list-view").addEventListener('click', function (e) {
 
     const ui = new UI();
 
-    if (element.name === 'ShowAlbum') {
-        let albumId = element.id;
-
-    
-
-    ui.loadPhotos (file, typeView, idAlbum) ;
-    
-}}
+    if (e.target.name === 'ShowAlbum') {
+        let albumId = e.target.id;
+        ui.loadPhotos (file, typeView, idAlbum) ;
+    }
+}
 )
  
